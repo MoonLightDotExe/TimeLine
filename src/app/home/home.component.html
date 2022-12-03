@@ -1,0 +1,53 @@
+<header> 
+    <h4> Experience </h4>
+<button type="button" (click)="onClick()" [class.X]="value" > ADD </button>
+<button type="button" *ngIf="value" (click)="onClick()"> CLOSE </button>
+</header>  
+<div class ="active" *ngIf = "value"> 
+    <div class="form">
+    <form #f="ngForm" (ngSubmit)="submit(f)"> 
+        <div class="form-group"> 
+            <label for="company">Company</label>
+            <input required ngModel name ="company" #company ="ngModel" (change)="log(company)" type="text" id="company" class="form-control">
+            <div class = "alert alert-danger" *ngIf="company.touched && !company.valid">
+                Company Name is required!
+            </div>
+        </div>
+        <div class="form-group"> 
+            <label for="startDate">Start Date</label>
+            <input required ngModel name="startDate" #startDate="ngModel" (change)="log(startDate)" type="month" id="start" class="form-control">
+            <div class = "alert alert-danger" *ngIf="startDate.touched && !startDate.valid">
+                Start Date is required!
+            </div>
+        </div>
+        <div class="form-group"> 
+            <label for="endDate">End Date</label>
+            <input required ngModel name="endDate" #endDate="ngModel" (change)="log(endDate)" type="month" id="end" class="form-control">
+            <div class = "alert alert-danger" *ngIf="endDate.touched && !endDate.valid">
+                End Date is required!
+            </div>
+        </div>
+        <div class="form-group"> 
+            <label for="title">Title</label>
+            <input required ngModel name="title" #title="ngModel" (change)="log(title)" type="text" id="title" class="form-control">
+            <div class = "alert alert-danger" *ngIf="title.touched && !title.valid">
+                Title is required!
+            </div>
+        </div>
+        <button class="btn btn-primary" [disabled]="!f.valid"> Submit </button>
+    </form>
+</div>
+</div>
+<div class="inner">
+    <ul>
+        <li *ngFor="let job of jobs">
+            <timeline 
+                [company] ="job.company" 
+                [start]="job.startDate"
+                [end]="job.endDate"
+                [title]="job.title"
+                > 
+            </timeline>
+        </li> 
+    </ul> 
+</div>
